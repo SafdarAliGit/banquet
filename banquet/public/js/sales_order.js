@@ -5,11 +5,13 @@ frappe.ui.form.on('Sales Order', {
     custom_hst:function(frm){
         if(frm.doc.custom_hst){
             set_service_charges(frm);
+            set_balance(frm);
         }
     },
     custom_cost:function(frm){
         if(frm.doc.custom_cost){
             set_service_charges(frm);
+            set_balance(frm);
         }
     },
     custom_deposit:function(frm){
