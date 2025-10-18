@@ -36,15 +36,19 @@ function set_balance(frm){
 
 frappe.ui.form.on("Sales Invoice Item", {
   // triggered when row is added / when row field changes
-  custom_is_elastic(frm, cdt, cdn) {
+  custom_is_elastic:function(frm, cdt, cdn) {
     const row = locals[cdt][cdn];
     toggle_read_only_child(frm, row);
   },
-  rate(frm, cdt, cdn) {
+  rate:function(frm, cdt, cdn) {
     const row = locals[cdt][cdn];
     toggle_read_only_child(frm, row);
   },
-  qty(frm, cdt, cdn) {
+  qty:function(frm, cdt, cdn) {
+    const row = locals[cdt][cdn];
+    toggle_read_only_child(frm, row);
+  },
+  item_code:function(frm, cdt, cdn) {
     const row = locals[cdt][cdn];
     toggle_read_only_child(frm, row);
   }
