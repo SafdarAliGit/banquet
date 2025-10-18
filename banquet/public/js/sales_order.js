@@ -32,3 +32,35 @@ function set_balance(frm){
     let deposit = cint(frm.doc.custom_deposit) || 0;
     frm.set_value("custom_balance_", service_charges - deposit);
 }
+
+
+frappe.ui.form.on('Sales Order Item', {
+    custom_is_elastic: function(frm, cdt, cdn) {
+        let row = locals[cdt][cdn];
+        toggle_read_only(frm, row);
+    },
+    item_code: function(frm, cdt, cdn) {
+        let row = locals[cdt][cdn];
+        toggle_read_only(frm, row);
+    },
+    items_add: function(frm, cdt, cdn) {
+        let row = locals[cdt][cdn];
+        toggle_read_only(frm, row);
+    },
+    items_remove: function(frm, cdt, cdn) {
+        let row = locals[cdt][cdn];
+        toggle_read_only(frm, row);
+    }
+});
+// Utility function to toggle read-only fields
+function toggle_read_only(frm, row) {
+    // Determine the read-only status based on the row's condition
+    let isReadOnly = Boolean(row.custom_is_elastic);
+    
+    // Use set_df_property to change the read_only state and refresh the field
+    frm.set_df_property('qty', 'read_only', isReadOnly, row.name);
+    frm.set_df_property('rate', 'read_only', isReadOnly, row.name);
+    
+    // Refresh the items table to reflect the visual change
+    frm.refresh_field('items');
+}
