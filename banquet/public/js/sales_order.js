@@ -34,34 +34,27 @@ function set_balance(frm){
 }
 
 
-frappe.ui.form.on('Sales Order Item', {
-    custom_is_elastic: function(frm, cdt, cdn) {
-        let row = locals[cdt][cdn];
-        toggle_read_only(frm, row);
-    },
-    item_code: function(frm, cdt, cdn) {
-        let row = locals[cdt][cdn];
-        toggle_read_only(frm, row);
-    },
-    items_add: function(frm, cdt, cdn) {
-        let row = locals[cdt][cdn];
-        toggle_read_only(frm, row);
-    },
-    items_remove: function(frm, cdt, cdn) {
-        let row = locals[cdt][cdn];
-        toggle_read_only(frm, row);
-    }
+frappe.ui.form.on("Sales Invoice Item", {
+  // triggered when row is added / when row field changes
+  custom_is_elastic(frm, cdt, cdn) {
+    const row = locals[cdt][cdn];
+    toggle_read_only_child(frm, row);
+  },
+  rate(frm, cdt, cdn) {
+    const row = locals[cdt][cdn];
+    toggle_read_only_child(frm, row);
+  },
+  qty(frm, cdt, cdn) {
+    const row = locals[cdt][cdn];
+    toggle_read_only_child(frm, row);
+  }
 });
-// Utility function to toggle read-only fields
-function toggle_read_only(frm, row) {
-    // Determine the read-only status based on the row's condition
-    let isReadOnly = Boolean(row.custom_is_elastic);
-    
-    // Use set_df_property to change the read_only state and refresh the field
-    frm.set_df_property('qty', 'read_only', isReadOnly, row.name);
-    frm.set_df_property('rate', 'read_only', isReadOnly, row.name);
-    
-    // Refresh the items table to reflect the visual change
-    frm.refresh_field('items');
-    console.log(isReadOnly);
+
+function toggle_read_only_child(frm, row) {
+  const isReadOnly = !!row.custom_is_elastic;
+  // for the field in the child table, specify table_field name = "items"
+  frm.set_df_property('qty', 'read_only', isReadOnly, frm.doc.name, 'items', row.name);
+  frm.set_df_property('rate', 'read_only', isReadOnly, frm.doc.name, 'items', row.name);
+  // Refresh just that grid
+  frm.fields_dict["items"].grid.refresh();
 }
