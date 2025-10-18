@@ -63,4 +63,5 @@ function toggle_read_only(frm, row) {
     
     // Refresh the items table to reflect the visual change
     frm.refresh_field('items');
+    console.log(isReadOnly);
 }
