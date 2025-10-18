@@ -34,45 +34,45 @@ function set_balance(frm){
 }
 
 
-frappe.ui.form.on("Sales Invoice Item", {
-  // triggered when row is added / when row field changes
-  custom_is_elastic:function(frm, cdt, cdn) {
-    toggle_read_only(frm, cdt, cdn);
-  },
-  rate:function(frm, cdt, cdn) {
-    toggle_read_only(frm, cdt, cdn);
-  },
-  qty:function(frm, cdt, cdn) {
-    toggle_read_only(frm, cdt, cdn);
-  },
-  item_code:function(frm, cdt, cdn) {
-    toggle_read_only(frm, cdt, cdn);
-  }
-});
+// frappe.ui.form.on("Sales Invoice Item", {
+//   // triggered when row is added / when row field changes
+//   custom_is_elastic:function(frm, cdt, cdn) {
+//     toggle_read_only(frm, cdt, cdn);
+//   },
+//   rate:function(frm, cdt, cdn) {
+//     toggle_read_only(frm, cdt, cdn);
+//   },
+//   qty:function(frm, cdt, cdn) {
+//     toggle_read_only(frm, cdt, cdn);
+//   },
+//   item_code:function(frm, cdt, cdn) {
+//     toggle_read_only(frm, cdt, cdn);
+//   }
+// });
 
-function toggle_read_only(frm, cdt, cdn) {
-    let row = locals[cdt][cdn];
-    if (!row) return;
+// function toggle_read_only(frm, cdt, cdn) {
+//     let row = locals[cdt][cdn];
+//     if (!row) return;
     
-    // Find the grid row in DOM
-    let grid_row = frm.fields_dict.items.grid.grid_rows_by_docname[cdn];
-    if (!grid_row) return;
+//     // Find the grid row in DOM
+//     let grid_row = frm.fields_dict.items.grid.grid_rows_by_docname[cdn];
+//     if (!grid_row) return;
     
-    let qty_field = grid_row.get_field('qty');
-    let rate_field = grid_row.get_field('rate');
+//     let qty_field = grid_row.get_field('qty');
+//     let rate_field = grid_row.get_field('rate');
     
-    if (row.custom_is_elastic) {
+//     if (row.custom_is_elastic) {
         
-        // Make fields read-only
-        if (qty_field) qty_field.df.read_only = 1;
-        if (rate_field) rate_field.df.read_only = 1;
+//         // Make fields read-only
+//         if (qty_field) qty_field.df.read_only = 1;
+//         if (rate_field) rate_field.df.read_only = 1;
         
-        // Refresh the fields
-        if (qty_field) qty_field.refresh();
-        if (rate_field) rate_field.refresh();
-    } else { 
-        // Refresh the fields
-        if (qty_field) qty_field.refresh();
-        if (rate_field) rate_field.refresh();
-    }
-}
+//         // Refresh the fields
+//         if (qty_field) qty_field.refresh();
+//         if (rate_field) rate_field.refresh();
+//     } else { 
+//         // Refresh the fields
+//         if (qty_field) qty_field.refresh();
+//         if (rate_field) rate_field.refresh();
+//     }
+// }
