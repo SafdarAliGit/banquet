@@ -4,6 +4,13 @@ app_publisher = "Safdar Ali"
 app_description = "this banquet"
 app_email = "safdar211@gmail.com"
 app_license = "mit"
+
+doc_events = {
+    "Sales Invoice": {
+        "on_submit": "banquet.banquet.api.api.send_invoice_via_whatsapp"
+    }
+}
+
 # required_apps = []
 
 # Includes in <head>
