@@ -42,7 +42,7 @@ def send_invoice_via_whatsapp(doc, method):
     }).insert(ignore_permissions=True)
 
     # Build file URL
-    file_url = f"https://banquet.thesmarterp.com/private/{file_doc.file_url}"
+    file_url = f"https://banquet.thesmarterp.com/private{file_doc.file_url}"
 
     # Twilio API config
     account_sid = settings.account_sid
