@@ -47,12 +47,12 @@ def send_invoice_via_whatsapp(doc, method):
     # Twilio API config
     account_sid = settings.account_sid
     auth_token = settings.auth_token
-    from_whatsapp = settings.whatsapp_no
+    from_whatsapp = f"whatsapp:{settings.whatsapp_no}"
     to_whatsapp = f"whatsapp:{mobile}"
 
     # Use Twilio Python SDK or REST call
     # Example using REST:
-    url = "https://api.twilio.com/2010-04-01/Accounts/{account_sid}/Messages.json".format(account_sid=account_sid)
+    url = f"https://api.twilio.com/2010-04-01/Accounts/{account_sid}/Messages.json"
     data = {
         "From": from_whatsapp,
         "To": to_whatsapp,
